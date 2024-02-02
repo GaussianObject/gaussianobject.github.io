@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="GaussainObject: Just Taking Four Images to Get A High-Quality 3D Object with Gaussian Splatting">
+  <meta name="keywords" content="Sparse view reconstruction, 3D Gaussian Splatting, ControlNet, Visual hull, Novel view synthesis">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GaussainObject: Just Taking Four Images to Get A High-Quality 3D Object with Gaussian Splatting</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2X3RQT9C4V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-2X3RQT9C4V');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">GaussainObject:<br/>Just Taking Four Images to Get A High-Quality 3D Object with Gaussian Splatting</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=zh-CN&user=StdXTR8AAAAJ">Chen Yang</a><sup>1*</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://gaussianobject.github.io/">Sikuang Li</a><sup>1*</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://jaminfong.cn/">Jiemin Fang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://nexuslrf.github.io/">Ruofan Liang</a><sup>3</sup>,
+            </span><br/>
+            <span class="author-block">
+              <a href="http://lingxixie.com/Home.html">Lingxi Xie</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://sites.google.com/site/zxphistory/">Xiaopeng Zhang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://shenwei1231.github.io/">Wei Shen</a><sup>1✉</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.qitian1987.com/">Qi Tian</a><sup>2</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Shanghai Jiao Tong University</span>
+            <span class="author-block"><sup>2</sup>Huawei Inc.</span>
+            <span class="author-block"><sup>3</sup>University of Toronto</span>
+          </div>
+
+          <div>
+            <span>* <i>denotes equal contributions.</i></span></br>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=ozoI0tmW3r0"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://gaussianobject.github.io/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (coming soon)</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <p style="text-align:center;">
+            <video poster="" id="evolution" autoplay controls muted loop playsinline height="100%">
+              <source src="static/videos/evolution.mp4" type="video/mp4">
+            </video>
+        </p>
+        <div class="content has-text-justified">
+          <p>
+            Reconstructing and rendering 3D objects from highly sparse views is of critical importance for promoting applications of 3D vision techniques and improving user experience. However, images from sparse views only contain very limited 3D information, leading to two significant challenges: 1) Difficulty in building multi-view consistency as images for matching are too few; 2) Partially omitted or highly compressed object information as view coverage is insufficient. To tackle these challenges, we propose GaussianObject, a framework to represent and render the 3D object with Gaussian splatting, that achieves high rendering quality with only 4 input images. We first introduce techniques of visual hull and floater elimination which explicitly inject structure priors into the initial optimization process for helping build multi-view consistency, yielding a coarse 3D Gaussian representation. Then we construct a Gaussian repair model based on diffusion models to supplement the omitted object information, where Gaussians are further refined. We design a self-generating strategy to obtain image pairs for training the repair model. Our GaussianObject is evaluated on several challenging datasets, including MipNeRF360, OmniObject3D, and OpenIllumination, achieving strong reconstruction results from only 4 views and significantly outperforming previous state-of-the-art methods.
+          </p>
+        </div>
+      </div>
+    </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <p style="text-align:center;position:relative;padding-top:56.25%;">
+          <iframe src="https://www.youtube.com/embed/ozoI0tmW3r0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+        </p>
+      </div>
+    </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Pipeline</h2>
+        <p style="text-align:center;">
+          <image width="100%" src="static/images/pipe.png" class="img-responsive" alt="overview">
+        </p>
+        <div class="content has-text-justified">
+          <p>
+            (a) We initialize 3D Gaussians by constructing a visual hull with camera parameters and masked images, optimizing them with the \(\mathcal{L}_{\text{gs}}\) and refining through floater elimination. (b) We use a novel `leave-one-out' strategy and add 3D noise to Gaussians to generate corrupted Gaussian renderings. These renderings, paired with their corresponding reference images, facilitate the training of the Gaussian repair model employing \(\mathcal{L}_{\text{tune}}\). (c) Once trained, the Gaussian repair model is frozen and used to correct views that need to be rectified. These views are identified through distance-aware sampling. The repaired images and reference images are used to further optimize 3D Gaussians with \(\mathcal{L}_{\text{rep}}\) and \(\mathcal{L}_{\text{gs}}\).
+          </p>
+        </div>
+      </div>
+    </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Results with 4 Input Images</h2>
+        <div id="results-carousel" class="carousel results-carousel">
+
+          <div>
+            <div class="results-item">
+              <video poster="" id="fabric_toy" autoplay muted loop playsinline height="100%">
+                <source src="static/videos/fabric_toy.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <div>
+            <div class="results-item">
+              <video poster="" id="garden" autoplay muted loop playsinline height="100%">
+                <source src="static/videos/garden.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <div>
+            <div class="results-item">
+              <video poster="" id="broccoli" autoplay muted loop playsinline height="100%">
+                <source src="static/videos/broccoli.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <div>
+            <div class="results-item">
+              <video poster="" id="dinosaur" autoplay muted loop playsinline height="100%">
+                <source src="static/videos/dinosaur.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <div>
+            <div class="results-item">
+              <video poster="" id="suitcase" autoplay muted loop playsinline height="100%">
+                <source src="static/videos/suitcase.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <div>
+            <div class="results-item">
+              <video poster="" id="vase" autoplay muted loop playsinline height="100%">
+                <source src="static/videos/vase.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <div>
+            <div class="results-item">
+              <video poster="" id="bonsai" autoplay muted loop playsinline height="100%">
+                <source src="static/videos/bonsai.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{yang2024gaussianobject,
+  title   = {GaussainObject: Just Taking Four Images to Get A High-Quality 3D Object with Gaussian Splatting},
+  author  = {Chen Yang and Sikuang Li and Jiemin Fang and Ruofan Liang and Lingxi Xie and Xiaopeng Zhang and Wei Shen and Qi Tian},
+  journal = {arXiv preprint arXiv:},
+  year    = {2024}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://arxiv.org/abs/">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/GaussianObject/GaussianObject" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            The website template was borrowed from <a href="https://nerfies.github.io/">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
