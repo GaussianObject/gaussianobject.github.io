@@ -23,9 +23,23 @@ function selectCompVideo(method, scene) {
 
   videoTime = ourVideo.currentTime;
 
+  let ourVideoReady = false;
+  let compVideoReady = false;
+
+  const checkVideosAndPlay = () => {
+    if (ourVideoReady && compVideoReady) {
+      ourVideo.currentTime = videoTime;
+      compVideo.currentTime = videoTime;
+      console.log("Playing videos");
+    }
+  };
+
   ourVideo.src = "static/videos/comparison/" + sceneName + "_" + inputViewNum + "_GaussianObject.mp4";
+  ourVideo.onloadeddata = () => {
+    ourVideoReady = true;
+    checkVideosAndPlay();
+  };
   ourVideo.load();
-  ourVideo.currentTime = videoTime;
 
   compVideo.src = "static/videos/comparison/" + sceneName + "_" + inputViewNum + "_" + methodName + ".mp4";
   if (methodName == "FSGS") {
@@ -33,6 +47,9 @@ function selectCompVideo(method, scene) {
       compVideo.src = "static/videos/comparison/nota.mp4";
     }
   }
+  compVideo.onloadeddata = () => {
+    compVideoReady = true;
+    checkVideosAndPlay();
+  };
   compVideo.load();
-  compVideo.currentTime = videoTime;
 }
