@@ -148,7 +148,6 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
             <strong>TL;DR:</strong> We present GaussianObject, a framework to represent and render the 3D object with Gaussian splatting, that achieves high rendering quality with only 4 input images.
@@ -164,14 +163,20 @@
           <button class="button method-button" value="ZeroRF" onclick="selectCompVideo(this)">ZeroRF</button>
           <button class="button method-button" value="FSGS" onclick="selectCompVideo(this)">FSGS</button>
         </div>
-        <span>
-          <video poster="" id="ours-comparison" autoplay muted loop playsinline width="45%">
-            <source src="static/videos/comparison/mip360_bonsai_4_GaussianObject.mp4" type="video/mp4">
-          </video>
-          <video poster="" id="others-comparison" autoplay muted loop playsinline width="45%">
-            <source src="static/videos/comparison/mip360_bonsai_4_3DGS.mp4" type="video/mp4">
-          </video>
-        </span>
+        <div class="columns is-gapless">
+          <div class="column">
+            <video poster="" id="ours-comparison" autoplay muted loop playsinline>
+              <source src="static/videos/comparison/mip360_bonsai_4_GaussianObject.mp4" type="video/mp4">
+            </video>
+            <div class="tag is-large is-link">GaussianObject</div><br/>
+          </div>
+          <div class="column">
+            <video poster="" id="others-comparison" autoplay muted loop playsinline>
+              <source src="static/videos/comparison/mip360_bonsai_4_3DGS.mp4" type="video/mp4">
+            </video>
+            <div class="tag is-large is-danger">Comparison</div><br/>
+          </div>
+        </div>
         <div class="buttons has-addons is-centered">
           <button class="button scene-button is-success is-selected" value="mip360_bonsai" onclick="selectCompVideo(undefined, this)">bonsai</button>
           <button class="button scene-button" value="mip360_garden" onclick="selectCompVideo(undefined, this)">garden</button>
@@ -185,6 +190,15 @@
           <button class="button scene-button" value="oppo_obj_27_pumpkin2" onclick="selectCompVideo(undefined, this)">pumpkin</button>
           <button class="button scene-button" value="oppo_obj_29_fabric_toy" onclick="selectCompVideo(undefined, this)">fabric toy</button>
         </div>
+      </div>
+    </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
             Reconstructing and rendering 3D objects from highly sparse views is of critical importance for promoting applications of 3D vision techniques and improving user experience. However, images from sparse views only contain very limited 3D information, leading to two significant challenges: 1) Difficulty in building multi-view consistency as images for matching are too few; 2) Partially omitted or highly compressed object information as view coverage is insufficient. To tackle these challenges, we propose GaussianObject, a framework to represent and render the 3D object with Gaussian splatting, that achieves high rendering quality with only 4 input images. We first introduce techniques of visual hull and floater elimination which explicitly inject structure priors into the initial optimization process for helping build multi-view consistency, yielding a coarse 3D Gaussian representation. Then we construct a Gaussian repair model based on diffusion models to supplement the omitted object information, where Gaussians are further refined. We design a self-generating strategy to obtain image pairs for training the repair model. Our GaussianObject is evaluated on several challenging datasets, including MipNeRF360, OmniObject3D, and OpenIllumination, achieving strong reconstruction results from only 4 views and significantly outperforming previous state-of-the-art methods.
