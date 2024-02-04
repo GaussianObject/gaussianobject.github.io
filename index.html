@@ -36,9 +36,10 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+  <script src="./static/js/compare.js"></script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
@@ -84,8 +85,8 @@
           </div>
 
           <div>
-            <span>* <i>denotes equal contributions.</i></span></br>
-            <span>† <i>denotes project lead.</i></span></br>
+            <span>* <i>Equal contribution.</i></span></br>
+            <span>† <i>Project lead.</i></span></br>
           </div>
 
           <div class="column has-text-centered">
@@ -105,7 +106,7 @@
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                   </span>
-                  <span>Paper</span>
+                  <span>Paper - Compressed</span>
                 </a>
               </span>
               <span class="link-block">
@@ -116,7 +117,7 @@
                   </span>
                   <span>arXiv</span>
                 </a>
-              </span>
+              </span><br/>
               <span class="link-block">
                 <a href="https://www.youtube.com/watch?v=ozoI0tmW3r0"
                    class="external-link button is-normal is-rounded is-dark">
@@ -148,11 +149,42 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
-        <p style="text-align:center;">
-            <video poster="" id="evolution" autoplay controls muted loop playsinline height="100%">
-              <source src="static/videos/evolution.mp4" type="video/mp4">
-            </video>
-        </p>
+        <div class="content has-text-justified">
+          <p>
+            <strong>TL;DR:</strong> We present GaussianObject, a framework to represent and render the 3D object with Gaussian splatting, that achieves high rendering quality with only 4 input images.
+          </p>
+        </div>
+        <div class="buttons has-addons is-centered">
+          <button class="button method-button is-success is-selected" value="3DGS" onclick="selectCompVideo(this)">3DGS</button>
+          <button class="button method-button" value="DVGO" onclick="selectCompVideo(this)">DVGO</button>
+          <button class="button method-button" value="DietNeRF" onclick="selectCompVideo(this)">DietNeRF</button>
+          <button class="button method-button" value="RegNeRF" onclick="selectCompVideo(this)">RegNeRF</button>
+          <button class="button method-button" value="FreeNeRF" onclick="selectCompVideo(this)">FreeNeRF</button>
+          <button class="button method-button" value="SparseNeRF" onclick="selectCompVideo(this)">SparseNeRF</button>
+          <button class="button method-button" value="ZeroRF" onclick="selectCompVideo(this)">ZeroRF</button>
+          <button class="button method-button" value="FSGS" onclick="selectCompVideo(this)">FSGS</button>
+        </div>
+        <span>
+          <video poster="" id="ours-comparison" autoplay muted loop playsinline width="45%">
+            <source src="static/videos/comparison/mip360_bonsai_4_GaussianObject.mp4" type="video/mp4">
+          </video>
+          <video poster="" id="others-comparison" autoplay muted loop playsinline width="45%">
+            <source src="static/videos/comparison/mip360_bonsai_4_3DGS.mp4" type="video/mp4">
+          </video>
+        </span>
+        <div class="buttons has-addons is-centered">
+          <button class="button scene-button is-success is-selected" value="mip360_bonsai" onclick="selectCompVideo(undefined, this)">bonsai</button>
+          <button class="button scene-button" value="mip360_garden" onclick="selectCompVideo(undefined, this)">garden</button>
+          <button class="button scene-button" value="mip360_kitchen" onclick="selectCompVideo(undefined, this)">kitchen</button>
+          <button class="button scene-button" value="omni3d_broccoli_003" onclick="selectCompVideo(undefined, this)">broccoli</button>
+          <button class="button scene-button" value="omni3d_dinosaur_006" onclick="selectCompVideo(undefined, this)">dinosaur</button>
+          <button class="button scene-button" value="omni3d_hamburger_012" onclick="selectCompVideo(undefined, this)">hamburger</button>
+          <button class="button scene-button" value="omni3d_pineapple_013" onclick="selectCompVideo(undefined, this)">pineapple</button>
+          <button class="button scene-button" value="omni3d_suitcase_006" onclick="selectCompVideo(undefined, this)">suitcase</button>
+          <button class="button scene-button" value="omni3d_vase_012" onclick="selectCompVideo(undefined, this)">vase</button>
+          <button class="button scene-button" value="oppo_obj_27_pumpkin2" onclick="selectCompVideo(undefined, this)">pumpkin</button>
+          <button class="button scene-button" value="oppo_obj_29_fabric_toy" onclick="selectCompVideo(undefined, this)">fabric toy</button>
+        </div>
         <div class="content has-text-justified">
           <p>
             Reconstructing and rendering 3D objects from highly sparse views is of critical importance for promoting applications of 3D vision techniques and improving user experience. However, images from sparse views only contain very limited 3D information, leading to two significant challenges: 1) Difficulty in building multi-view consistency as images for matching are too few; 2) Partially omitted or highly compressed object information as view coverage is insufficient. To tackle these challenges, we propose GaussianObject, a framework to represent and render the 3D object with Gaussian splatting, that achieves high rendering quality with only 4 input images. We first introduce techniques of visual hull and floater elimination which explicitly inject structure priors into the initial optimization process for helping build multi-view consistency, yielding a coarse 3D Gaussian representation. Then we construct a Gaussian repair model based on diffusion models to supplement the omitted object information, where Gaussians are further refined. We design a self-generating strategy to obtain image pairs for training the repair model. Our GaussianObject is evaluated on several challenging datasets, including MipNeRF360, OmniObject3D, and OpenIllumination, achieving strong reconstruction results from only 4 views and significantly outperforming previous state-of-the-art methods.
@@ -187,15 +219,21 @@
             (a) We initialize 3D Gaussians by constructing a visual hull with camera parameters and masked images, optimizing them with the \(\mathcal{L}_{\text{gs}}\) and refining through floater elimination. (b) We use a novel `leave-one-out' strategy and add 3D noise to Gaussians to generate corrupted Gaussian renderings. These renderings, paired with their corresponding reference images, facilitate the training of the Gaussian repair model employing \(\mathcal{L}_{\text{tune}}\). (c) Once trained, the Gaussian repair model is frozen and used to correct views that need to be rectified. These views are identified through distance-aware sampling. The repaired images and reference images are used to further optimize 3D Gaussians with \(\mathcal{L}_{\text{rep}}\) and \(\mathcal{L}_{\text{gs}}\).
           </p>
         </div>
+        <p style="text-align:center;">
+          <video poster="" id="evolution" autoplay controls muted loop playsinline height="100%">
+            <source src="static/videos/evolution.mp4" type="video/mp4">
+          </video>
+        </p>
       </div>
     </div>
 </section>
 
+<!--
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Results with 4 Input Images</h2>
+        <h2 class="title is-3">More Results with 4 Input Images</h2>
         <div id="results-carousel" class="carousel results-carousel">
 
           <div>
@@ -259,6 +297,7 @@
     </div>
   </div>
 </section>
+-->
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
@@ -280,7 +319,7 @@
          href="https://arxiv.org/abs/">
         <i class="fas fa-file-pdf"></i>
       </a>
-      <a class="icon-link" href="https://github.com/GaussianObject/GaussianObject" class="external-link" disabled>
+      <a class="icon-link" href="https://gaussianobject.github.io/" class="external-link" disabled>
         <i class="fab fa-github"></i>
       </a>
     </div>
@@ -288,7 +327,7 @@
       <div class="column is-8">
         <div class="content">
           <p>
-            The website template was borrowed from <a href="https://nerfies.github.io/">Nerfies</a>.
+            The website template was borrowed from <a href="https://nerfies.github.io/">Nerfies</a>. Also thanks to <a href="https://bulma.io/">bulma</a>, <a href="https://jaminfong.cn/tineuvox/">TiNeuVox</a> and <a href="https://reconfusion.github.io/">ReconFusion</a>.
           </p>
         </div>
       </div>
