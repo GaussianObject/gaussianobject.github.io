@@ -233,11 +233,14 @@
             (a) We initialize 3D Gaussians by constructing a visual hull with camera parameters and masked images, optimizing them with the \(\mathcal{L}_{\text{gs}}\) and refining through floater elimination. (b) We use a novel `leave-one-out' strategy and add 3D noise to Gaussians to generate corrupted Gaussian renderings. These renderings, paired with their corresponding reference images, facilitate the training of the Gaussian repair model employing \(\mathcal{L}_{\text{tune}}\). (c) Once trained, the Gaussian repair model is frozen and used to correct views that need to be rectified. These views are identified through distance-aware sampling. The repaired images and reference images are used to further optimize 3D Gaussians with \(\mathcal{L}_{\text{rep}}\) and \(\mathcal{L}_{\text{gs}}\).
           </p>
         </div>
-        <p style="text-align:center;">
-          <video poster="" id="evolution" autoplay controls muted loop playsinline height="100%">
-            <source src="static/videos/evolution.mp4" type="video/mp4">
-          </video>
-        </p>
+        <video poster="" id="evolution" autoplay controls muted loop playsinline height="100%">
+          <source src="static/videos/evolution.mp4" type="video/mp4">
+        </video>
+        <div class="content has-text-justified">
+          <p>
+            Evolution of the 3D objects with Gaussian splatting only, with structure priors and with Gaussian repair model injected.
+          </p>
+        </div>
       </div>
     </div>
 </section>
@@ -315,13 +318,19 @@
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@article{yang2024gaussianobject,
-  title   = {GaussainObject: Just Taking Four Images to Get A High-Quality 3D Object with Gaussian Splatting},
-  author  = {Chen Yang and Sikuang Li and Jiemin Fang and Ruofan Liang and Lingxi Xie and Xiaopeng Zhang and Wei Shen and Qi Tian},
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title has-text-centered">Citation</h2>
+        <pre><code>@article{yang2024gaussianobject,
+  title   = {GaussainObject: Just Taking Four Images to Get A High-Quality
+             3D Object with Gaussian Splatting},
+  author  = {Chen Yang and Sikuang Li and Jiemin Fang and Ruofan Liang and
+             Lingxi Xie and Xiaopeng Zhang and Wei Shen and Qi Tian},
   journal = {arXiv preprint arXiv:},
   year    = {2024}
 }</code></pre>
+      </div>
+    </div>
   </div>
 </section>
 
