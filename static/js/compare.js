@@ -7,6 +7,8 @@ $(document).ready(function () {
 });
 
 function selectCompVideo(method, scene) {
+  let lastSceneName = activeScene.getAttribute("value");
+
   if (method) {
     activeMethod.classList.remove("is-success", "is-selected");
     activeMethod = method;
@@ -26,20 +28,30 @@ function selectCompVideo(method, scene) {
   let ourVideoReady = false;
   let compVideoReady = false;
 
+  ourVideo.pause();
+  compVideo.pause();
+
   const checkVideosAndPlay = () => {
     if (ourVideoReady && compVideoReady) {
       ourVideo.currentTime = videoTime;
       compVideo.currentTime = videoTime;
-      console.log("Playing videos");
+      ourVideo.play();
+      compVideo.play();
     }
   };
 
-  ourVideo.src = "static/videos/comparison/" + sceneName + "_" + inputViewNum + "_GaussianObject.mp4";
-  ourVideo.onloadeddata = () => {
+  if (sceneName != lastSceneName) {
+    ourVideo.src = "static/videos/comparison/" + sceneName + "_" + inputViewNum + "_GaussianObject.mp4";
+    ourVideo.onloadeddata = () => {
+      ourVideoReady = true;
+      checkVideosAndPlay();
+    };
+    ourVideo.load();
+    ourVideo.currentTime = videoTime;
+  } else {
     ourVideoReady = true;
     checkVideosAndPlay();
-  };
-  ourVideo.load();
+  }
 
   compVideo.src = "static/videos/comparison/" + sceneName + "_" + inputViewNum + "_" + methodName + ".mp4";
   if (methodName == "FSGS") {
@@ -52,4 +64,5 @@ function selectCompVideo(method, scene) {
     checkVideosAndPlay();
   };
   compVideo.load();
+  compVideo.currentTime = videoTime;
 }
