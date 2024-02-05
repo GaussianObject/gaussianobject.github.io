@@ -1,6 +1,6 @@
 $(document).ready(function () {
   activeSingleMethod = $(".single-method-button").filter(".is-selected")[0];
-  compVideo = document.getElementById("single-comparison");
+  compSingleVideo = document.getElementById("single-comparison");
   compCanvas = document.getElementById("single-comparison-canvas");
   inputViewNum = 4;
 });
@@ -12,19 +12,19 @@ function selectSingleCompVideo(method) {
 
   methodName = activeSingleMethod.getAttribute("value");
 
-  compVideo.src = "static/videos/refresh/mip360_kitchen_" + inputViewNum + "_" + methodName + ".mp4";
-  compVideo.load();
+  compSingleVideo.src = "static/videos/refresh/mip360_kitchen_" + inputViewNum + "_" + methodName + ".mp4";
+  compSingleVideo.load();
 }
 
 function playVids() {
   var position = 0.5;
-  var vidWidth = compVideo.videoWidth / 2;
-  var vidHeight = compVideo.videoHeight;
+  var vidWidth = compSingleVideo.videoWidth / 2;
+  var vidHeight = compSingleVideo.videoHeight;
 
   var mergeContext = compCanvas.getContext("2d");
 
-  if (compVideo.readyState > 3) {
-    compVideo.play();
+  if (compSingleVideo.readyState > 3) {
+    compSingleVideo.play();
 
     function trackLocation(e) {
       // Normalize to [0, 1]
@@ -42,10 +42,10 @@ function playVids() {
     compCanvas.addEventListener("touchmove", trackLocationTouch, false);
 
     function drawLoop() {
-      mergeContext.drawImage(compVideo, 0, 0, vidWidth, vidHeight, 0, 0, vidWidth, vidHeight);
+      mergeContext.drawImage(compSingleVideo, 0, 0, vidWidth, vidHeight, 0, 0, vidWidth, vidHeight);
       var colStart = (vidWidth * position).clamp(0.0, vidWidth);
       var colWidth = (vidWidth - vidWidth * position).clamp(0.0, vidWidth);
-      mergeContext.drawImage(compVideo, colStart + vidWidth, 0, colWidth, vidHeight, colStart, 0, colWidth, vidHeight);
+      mergeContext.drawImage(compSingleVideo, colStart + vidWidth, 0, colWidth, vidHeight, colStart, 0, colWidth, vidHeight);
       requestAnimationFrame(drawLoop);
 
       var arrowLength = 0.09 * vidHeight;
