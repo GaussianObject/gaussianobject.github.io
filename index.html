@@ -39,7 +39,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/index.js"></script>
-  <script src="./static/js/compare.js"></script>
+  <script src="./static/js/quantitative-compare.js"></script>
+  <script src="./static/js/single-compare.js"></script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
@@ -117,7 +118,7 @@
                   </span>
                   <span>arXiv</span>
                 </a>
-              </span><br/>
+              </span>
               <span class="link-block">
                 <a href="https://www.youtube.com/watch?v=ozoI0tmW3r0"
                    class="external-link button is-normal is-rounded is-dark">
@@ -128,12 +129,12 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://gaussianobject.github.io/"
+                <a href="https://github.com/GaussianObject/gaussian-object"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Code (coming soon)</span>
+                  <span>Code</span>
                 </a>
               </span>
             </div>
@@ -154,45 +155,30 @@
           </p>
         </div>
         <div class="buttons has-addons is-centered">
-          <button class="button method-button is-success is-selected" value="3DGS" onclick="selectCompVideo(this)">3DGS</button>
-          <button class="button method-button" value="DVGO" onclick="selectCompVideo(this)">DVGO</button>
-          <button class="button method-button" value="DietNeRF" onclick="selectCompVideo(this)">DietNeRF</button>
-          <button class="button method-button" value="RegNeRF" onclick="selectCompVideo(this)">RegNeRF</button>
-          <button class="button method-button" value="FreeNeRF" onclick="selectCompVideo(this)">FreeNeRF</button>
-          <button class="button method-button" value="SparseNeRF" onclick="selectCompVideo(this)">SparseNeRF</button>
-          <button class="button method-button" value="ZeroRF" onclick="selectCompVideo(this)">ZeroRF</button>
-          <button class="button method-button" value="FSGS" onclick="selectCompVideo(this)">FSGS</button>
+          <button class="button single-method-button is-success is-selected" value="3DGS" onclick="selectSingleCompVideo(this)">3DGS</button>
+          <button class="button single-method-button" value="DVGO" onclick="selectSingleCompVideo(this)">DVGO</button>
+          <button class="button single-method-button" value="DietNeRF" onclick="selectSingleCompVideo(this)">DietNeRF</button>
+          <button class="button single-method-button" value="RegNeRF" onclick="selectSingleCompVideo(this)">RegNeRF</button>
+          <button class="button single-method-button" value="FreeNeRF" onclick="selectSingleCompVideo(this)">FreeNeRF</button>
+          <button class="button single-method-button" value="SparseNeRF" onclick="selectSingleCompVideo(this)">SparseNeRF</button>
+          <button class="button single-method-button" value="ZeroRF" onclick="selectSingleCompVideo(this)">ZeroRF</button>
+          <button class="button single-method-button" value="FSGS" onclick="selectSingleCompVideo(this)">FSGS</button>
         </div>
         <div class="columns is-gapless">
           <div class="column">
             <div class="video-container">
-              <video poster="" id="ours-comparison" autoplay muted loop playsinline>
-                <source src="static/videos/comparison/mip360_bonsai_4_GaussianObject.mp4" type="video/mp4">
+              <video poster="" id="single-ours-comparison" autoplay muted loop playsinline>
+                <source src="static/videos/comparison/mip360_kitchen_4_GaussianObject.mp4" type="video/mp4">
               </video>
             </div>
-            <div class="tag is-large is-link">GaussianObject</div><br/>
           </div>
           <div class="column">
             <div class="video-container">
-              <video poster="" id="others-comparison" autoplay muted loop playsinline>
-                <source src="static/videos/comparison/mip360_bonsai_4_3DGS.mp4" type="video/mp4">
+              <video poster="" id="single-others-comparison" autoplay muted loop playsinline>
+                <source src="static/videos/comparison/mip360_kitchen_4_3DGS.mp4" type="video/mp4">
               </video>
             </div>
-            <div class="tag is-large is-danger">Comparison</div><br/>
           </div>
-        </div>
-        <div class="buttons has-addons is-centered">
-          <button class="button scene-button is-success is-selected" value="mip360_bonsai" onclick="selectCompVideo(undefined, this)">bonsai</button>
-          <button class="button scene-button" value="mip360_garden" onclick="selectCompVideo(undefined, this)">garden</button>
-          <button class="button scene-button" value="mip360_kitchen" onclick="selectCompVideo(undefined, this)">kitchen</button>
-          <button class="button scene-button" value="omni3d_broccoli_003" onclick="selectCompVideo(undefined, this)">broccoli</button>
-          <button class="button scene-button" value="omni3d_dinosaur_006" onclick="selectCompVideo(undefined, this)">dinosaur</button>
-          <button class="button scene-button" value="omni3d_hamburger_012" onclick="selectCompVideo(undefined, this)">hamburger</button>
-          <button class="button scene-button" value="omni3d_pineapple_013" onclick="selectCompVideo(undefined, this)">pineapple</button>
-          <button class="button scene-button" value="omni3d_suitcase_006" onclick="selectCompVideo(undefined, this)">suitcase</button>
-          <button class="button scene-button" value="omni3d_vase_012" onclick="selectCompVideo(undefined, this)">vase</button>
-          <button class="button scene-button" value="oppo_obj_27_pumpkin2" onclick="selectCompVideo(undefined, this)">pumpkin</button>
-          <button class="button scene-button" value="oppo_obj_29_fabric_toy" onclick="selectCompVideo(undefined, this)">fabric toy</button>
         </div>
       </div>
     </div>
@@ -237,6 +223,15 @@
             (a) We initialize 3D Gaussians by constructing a visual hull with camera parameters and masked images, optimizing them with the \(\mathcal{L}_{\text{gs}}\) and refining through floater elimination. (b) We use a novel `leave-one-out' strategy and add 3D noise to Gaussians to generate corrupted Gaussian renderings. These renderings, paired with their corresponding reference images, facilitate the training of the Gaussian repair model employing \(\mathcal{L}_{\text{tune}}\). (c) Once trained, the Gaussian repair model is frozen and used to correct views that need to be rectified. These views are identified through distance-aware sampling. The repaired images and reference images are used to further optimize 3D Gaussians with \(\mathcal{L}_{\text{rep}}\) and \(\mathcal{L}_{\text{gs}}\).
           </p>
         </div>
+      </div>
+    </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Ablation</h2>
         <video poster="" id="evolution" autoplay controls muted loop playsinline height="100%">
           <source src="static/videos/evolution.mp4" type="video/mp4">
         </video>
@@ -247,6 +242,57 @@
         </div>
       </div>
     </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="buttons has-addons is-centered">
+          <button class="button method-button is-success is-selected" value="3DGS" onclick="selectCompVideo(this)">3DGS</button>
+          <button class="button method-button" value="DVGO" onclick="selectCompVideo(this)">DVGO</button>
+          <button class="button method-button" value="DietNeRF" onclick="selectCompVideo(this)">DietNeRF</button>
+          <button class="button method-button" value="RegNeRF" onclick="selectCompVideo(this)">RegNeRF</button>
+          <button class="button method-button" value="FreeNeRF" onclick="selectCompVideo(this)">FreeNeRF</button>
+          <button class="button method-button" value="SparseNeRF" onclick="selectCompVideo(this)">SparseNeRF</button>
+          <button class="button method-button" value="ZeroRF" onclick="selectCompVideo(this)">ZeroRF</button>
+          <button class="button method-button" value="FSGS" onclick="selectCompVideo(this)">FSGS</button>
+        </div>
+        <div class="columns is-gapless">
+          <div class="column">
+            <div class="video-container">
+              <video poster="" id="ours-comparison" autoplay muted loop playsinline>
+                <source src="static/videos/comparison/mip360_bonsai_4_GaussianObject.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="tag is-large is-white">GaussianObject</div><br/>
+          </div>
+          <div class="column">
+            <div class="video-container">
+              <video poster="" id="others-comparison" autoplay muted loop playsinline>
+                <source src="static/videos/comparison/mip360_bonsai_4_3DGS.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="tag is-large is-white">Comparison</div><br/>
+          </div>
+        </div>
+        <div class="buttons has-addons is-centered">
+          <button class="button scene-button is-success is-selected" value="mip360_bonsai" onclick="selectCompVideo(undefined, this)">bonsai</button>
+          <button class="button scene-button" value="mip360_garden" onclick="selectCompVideo(undefined, this)">garden</button>
+          <button class="button scene-button" value="omni3d_broccoli_003" onclick="selectCompVideo(undefined, this)">broccoli</button>
+          <button class="button scene-button" value="omni3d_dinosaur_006" onclick="selectCompVideo(undefined, this)">dinosaur</button>
+          <button class="button scene-button" value="omni3d_hamburger_012" onclick="selectCompVideo(undefined, this)">hamburger</button>
+        </div>
+        <div class="buttons has-addons is-centered">
+          <button class="button scene-button" value="omni3d_pineapple_013" onclick="selectCompVideo(undefined, this)">pineapple</button>
+          <button class="button scene-button" value="omni3d_suitcase_006" onclick="selectCompVideo(undefined, this)">suitcase</button>
+          <button class="button scene-button" value="omni3d_vase_012" onclick="selectCompVideo(undefined, this)">vase</button>
+          <button class="button scene-button" value="oppo_obj_27_pumpkin2" onclick="selectCompVideo(undefined, this)">pumpkin</button>
+          <button class="button scene-button" value="oppo_obj_29_fabric_toy" onclick="selectCompVideo(undefined, this)">fabric toy</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!--
@@ -346,7 +392,7 @@
          href="https://arxiv.org/abs/">
         <i class="fas fa-file-pdf"></i>
       </a>
-      <a class="icon-link" href="https://gaussianobject.github.io/" class="external-link" disabled>
+      <a class="icon-link" href="https://github.com/GaussianObject/gaussian-object" class="external-link" disabled>
         <i class="fab fa-github"></i>
       </a>
     </div>
