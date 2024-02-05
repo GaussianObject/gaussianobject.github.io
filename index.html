@@ -32,11 +32,11 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/index-sass.css">
   <link rel="icon" href="./static/images/favicon.png">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/index.js"></script>
   <script src="./static/js/quantitative-compare.js"></script>
@@ -129,7 +129,7 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://github.com/GaussianObject/gaussian-object"
+                <a href="https://github.com/GaussianObject/GaussianObject"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -164,21 +164,9 @@
           <button class="button single-method-button" value="ZeroRF" onclick="selectSingleCompVideo(this)">ZeroRF</button>
           <button class="button single-method-button" value="FSGS" onclick="selectSingleCompVideo(this)">FSGS</button>
         </div>
-        <div class="columns is-gapless">
-          <div class="column">
-            <div class="video-container">
-              <video poster="" id="single-ours-comparison" autoplay muted loop playsinline>
-                <source src="static/videos/comparison/mip360_kitchen_4_GaussianObject.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
-          <div class="column">
-            <div class="video-container">
-              <video poster="" id="single-others-comparison" autoplay muted loop playsinline>
-                <source src="static/videos/comparison/mip360_kitchen_4_3DGS.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
+        <div>
+          <video poster="" id="single-comparison" autoplay muted loop playsinline src="static/videos/refresh/mip360_kitchen_4_3DGS.mp4" onplay="resizeAndPlay(this)"></video>
+          <canvas height=0 id="single-comparison-canvas"></canvas>
         </div>
       </div>
     </div>
@@ -392,7 +380,7 @@
          href="https://arxiv.org/abs/">
         <i class="fas fa-file-pdf"></i>
       </a>
-      <a class="icon-link" href="https://github.com/GaussianObject/gaussian-object" class="external-link" disabled>
+      <a class="icon-link" href="https://github.com/GaussianObject/GaussianObject" class="external-link" disabled>
         <i class="fab fa-github"></i>
       </a>
     </div>

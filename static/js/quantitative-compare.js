@@ -7,7 +7,6 @@ $(document).ready(function () {
 });
 
 function selectCompVideo(method, scene) {
-  console.log('selectCompVideo called', method, scene)
   let lastSceneName = activeScene.getAttribute("value");
 
   if (method) {
