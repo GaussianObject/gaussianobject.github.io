@@ -39,8 +39,7 @@
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/index.js"></script>
-  <!-- <script src="./static/js/quantitative-compare.js"></script> -->
-  <script src="./static/js/single-compare.js"></script>
+  <script src="./static/js/compare.js"></script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
@@ -165,9 +164,9 @@
           <button class="button method-button is-white" value="FSGS" onclick="selectCompVideo(this)">FSGS</button>
         </div>
         <div>
-          <video poster="" id="single-comparison-video" autoplay muted loop playsinline src="static/videos/omni3d_dinosaur_006_4_3DGS.mp4" onplay="resizeAndPlay(this)"></video>
+          <video poster="" id="single-comparison-video" autoplay muted loop playsinline src="static/videos/comparison/omni3d_dinosaur_006_4_3DGS.mp4" onplay="resizeAndPlay(this)"></video>
           <canvas height=0 id="single-comparison-canvas"></canvas>
-          <p>Generated with only four input images.</p>
+          <p>Generated with only <strong>four</strong> input images.</p>
         </div>
       </div>
     </div>
@@ -220,6 +219,7 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths" id="more-comparison">
+        <h2 class="title is-3">More Results</h2>
         <div class="is-centered method-buttons">
           <button class="button method-button is-white is-success is-selected" value="3DGS" onclick="selectCompVideo(this)">3DGS</button>
           <button class="button method-button is-white" value="DVGO" onclick="selectCompVideo(this)">DVGO</button>
@@ -231,9 +231,9 @@
           <button class="button method-button is-white" value="FSGS" onclick="selectCompVideo(this)">FSGS</button>
         </div>
         <div>
-          <video poster="" id="more-comparison-video" autoplay muted loop playsinline src="static/videos/mip360_bonsai_4_3DGS.mp4" onplay="resizeAndPlay(this)"></video>
+          <video poster="" id="more-comparison-video" autoplay muted loop playsinline src="static/videos/comparison/mip360_bonsai_4_3DGS.mp4" onplay="resizeAndPlay(this)"></video>
           <canvas height=0 id="more-comparison-canvas"></canvas>
-          <p>Generated with only four input images.</p>
+          <p>Generated with only <strong>four</strong> input images.</p>
         </div>
         <div class="is-centered scene-buttons">
           <button class="button scene-button is-white is-success is-selected" value="mip360_bonsai" onclick="selectCompVideo(this)">bonsai</button>
