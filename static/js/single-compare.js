@@ -1,59 +1,62 @@
-$(document).ready(function () {
-  activeSingleMethod = $(".single-method-button").filter(".is-selected")[0];
-  compSingleVideo = document.getElementById("single-comparison");
-  compCanvas = document.getElementById("single-comparison-canvas");
-  inputViewNum = 4;
-});
+function selectCompVideo(element) {
+  console.log(element)
+  console.log(element.parentElement)
+  console.log(element.parentElement.parentElement)
 
-function selectSingleCompVideo(method) {
-  activeSingleMethod.classList.remove("is-success", "is-selected");
-  activeSingleMethod = method;
-  activeSingleMethod.classList.add("is-success", "is-selected");
+  element.parentElement.getElementsByClassName("is-selected")[0].classList.remove("is-success", "is-selected");
+  element.classList.add("is-success", "is-selected");
 
-  methodName = activeSingleMethod.getAttribute("value");
+  let parent = element.parentElement.parentElement;
+  let videoId = parent.getAttribute("id") + "-video";
+  let methodName = parent.getElementsByClassName("method-buttons")[0].getElementsByClassName("is-selected")[0].getAttribute("value");
+  let sceneName = parent.getElementsByClassName("scene-buttons").length == 0 ? "omni3d_dinosaur_006" : parent.getElementsByClassName("scene-buttons")[0].getElementsByClassName("is-selected")[0].getAttribute("value");
 
-  compSingleVideo.src = "static/videos/refresh/mip360_kitchen_" + inputViewNum + "_" + methodName + ".mp4";
-  compSingleVideo.load();
+  let video = document.getElementById(videoId);
+  video.src = "static/videos/" + sceneName + "_4_" + methodName + ".mp4";
+  video.load();
 }
 
-function playVids() {
-  var position = 0.5;
-  var vidWidth = compSingleVideo.videoWidth / 2;
-  var vidHeight = compSingleVideo.videoHeight;
+function playVids(videoId) {
+  let canvas = document.getElementById(videoId.replace('video', 'canvas'));
+  let video = document.getElementById(videoId);
 
-  var mergeContext = compCanvas.getContext("2d");
+  let position = 0.5;
+  let vidWidth = video.videoWidth / 2;
+  let vidHeight = video.videoHeight;
 
-  if (compSingleVideo.readyState > 3) {
-    compSingleVideo.play();
+  let mergeContext = canvas.getContext("2d");
+
+  if (video.readyState > 3) {
+    video.play();
 
     function trackLocation(e) {
       // Normalize to [0, 1]
-      bcr = compCanvas.getBoundingClientRect();
+      bcr = canvas.getBoundingClientRect();
       position = (e.pageX - bcr.x) / bcr.width;
     }
     function trackLocationTouch(e) {
       // Normalize to [0, 1]
-      bcr = compCanvas.getBoundingClientRect();
+      bcr = canvas.getBoundingClientRect();
       position = (e.touches[0].pageX - bcr.x) / bcr.width;
     }
 
-    compCanvas.addEventListener("mousemove", trackLocation, false);
-    compCanvas.addEventListener("touchstart", trackLocationTouch, false);
-    compCanvas.addEventListener("touchmove", trackLocationTouch, false);
+    canvas.addEventListener("mousemove", trackLocation, false);
+    canvas.addEventListener("touchstart", trackLocationTouch, false);
+    canvas.addEventListener("touchmove", trackLocationTouch, false);
 
     function drawLoop() {
-      mergeContext.drawImage(compSingleVideo, 0, 0, vidWidth, vidHeight, 0, 0, vidWidth, vidHeight);
-      var colStart = (vidWidth * position).clamp(0.0, vidWidth);
-      var colWidth = (vidWidth - vidWidth * position).clamp(0.0, vidWidth);
-      mergeContext.drawImage(compSingleVideo, colStart + vidWidth, 0, colWidth, vidHeight, colStart, 0, colWidth, vidHeight);
+      mergeContext.drawImage(video, 0, 0, vidWidth, vidHeight, 0, 0, vidWidth, vidHeight);
+      let colStart = (vidWidth * position).clamp(0.0, vidWidth);
+      let colWidth = (vidWidth - vidWidth * position).clamp(0.0, vidWidth);
+      mergeContext.drawImage(video, colStart + vidWidth, 0, colWidth, vidHeight, colStart, 0, colWidth, vidHeight);
       requestAnimationFrame(drawLoop);
 
-      var arrowLength = 0.09 * vidHeight;
-      var arrowheadWidth = 0.025 * vidHeight;
-      var arrowheadLength = 0.04 * vidHeight;
-      var arrowPosY = vidHeight / 10;
-      var arrowWidth = 0.007 * vidHeight;
-      var currX = vidWidth * position;
+      let arrowLength = 0.09 * vidHeight;
+      let arrowheadWidth = 0.025 * vidHeight;
+      let arrowheadLength = 0.04 * vidHeight;
+      let arrowPosY = vidHeight / 10;
+      let arrowWidth = 0.007 * vidHeight;
+      let currX = vidWidth * position;
 
       // Draw circle
       mergeContext.arc(currX, arrowPosY, arrowLength * 0.7, 0, Math.PI * 2, false);
@@ -137,10 +140,11 @@ Number.prototype.clamp = function (min, max) {
 };
 
 function resizeAndPlay(element) {
-  compCanvas.width = element.videoWidth / 2;
-  compCanvas.height = element.videoHeight;
-  console.log(element.videoWidth, element.videoHeight, compCanvas.width, compCanvas.height);
+  let canvas = document.getElementById(element.id.replace('video', 'canvas'));
+  canvas.width = element.videoWidth / 2;
+  canvas.height = element.videoHeight;
+  console.log(element.videoWidth, element.videoHeight, canvas.width, canvas.height);
   element.play();
   element.style.height = "0px";
-  playVids();
+  playVids(element.id);
 }

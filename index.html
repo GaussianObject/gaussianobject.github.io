@@ -39,7 +39,7 @@
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/index.js"></script>
-  <script src="./static/js/quantitative-compare.js"></script>
+  <!-- <script src="./static/js/quantitative-compare.js"></script> -->
   <script src="./static/js/single-compare.js"></script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -148,25 +148,26 @@
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
+      <div class="column is-four-fifths" id="single-comparison">
         <div class="content has-text-justified">
           <p>
             <strong>TL;DR:</strong> We present GaussianObject, a framework to represent and render the 3D object with Gaussian splatting, that achieves high rendering quality with only 4 input images.
           </p>
         </div>
-        <div class="buttons has-addons is-centered">
-          <button class="button single-method-button is-success is-selected" value="3DGS" onclick="selectSingleCompVideo(this)">3DGS</button>
-          <button class="button single-method-button" value="DVGO" onclick="selectSingleCompVideo(this)">DVGO</button>
-          <button class="button single-method-button" value="DietNeRF" onclick="selectSingleCompVideo(this)">DietNeRF</button>
-          <button class="button single-method-button" value="RegNeRF" onclick="selectSingleCompVideo(this)">RegNeRF</button>
-          <button class="button single-method-button" value="FreeNeRF" onclick="selectSingleCompVideo(this)">FreeNeRF</button>
-          <button class="button single-method-button" value="SparseNeRF" onclick="selectSingleCompVideo(this)">SparseNeRF</button>
-          <button class="button single-method-button" value="ZeroRF" onclick="selectSingleCompVideo(this)">ZeroRF</button>
-          <button class="button single-method-button" value="FSGS" onclick="selectSingleCompVideo(this)">FSGS</button>
+        <div class="is-centered method-buttons">
+          <button class="button method-button is-white is-success is-selected" value="3DGS" onclick="selectCompVideo(this)">3DGS</button>
+          <button class="button method-button is-white" value="DVGO" onclick="selectCompVideo(this)">DVGO</button>
+          <button class="button method-button is-white" value="DietNeRF" onclick="selectCompVideo(this)">DietNeRF</button>
+          <button class="button method-button is-white" value="RegNeRF" onclick="selectCompVideo(this)">RegNeRF</button>
+          <button class="button method-button is-white" value="FreeNeRF" onclick="selectCompVideo(this)">FreeNeRF</button>
+          <button class="button method-button is-white" value="SparseNeRF" onclick="selectCompVideo(this)">SparseNeRF</button>
+          <button class="button method-button is-white" value="ZeroRF" onclick="selectCompVideo(this)">ZeroRF</button>
+          <button class="button method-button is-white" value="FSGS" onclick="selectCompVideo(this)">FSGS</button>
         </div>
         <div>
-          <video poster="" id="single-comparison" autoplay muted loop playsinline src="static/videos/refresh/mip360_kitchen_4_3DGS.mp4" onplay="resizeAndPlay(this)"></video>
+          <video poster="" id="single-comparison-video" autoplay muted loop playsinline src="static/videos/omni3d_dinosaur_006_4_3DGS.mp4" onplay="resizeAndPlay(this)"></video>
           <canvas height=0 id="single-comparison-canvas"></canvas>
+          <p>Generated with only four input images.</p>
         </div>
       </div>
     </div>
@@ -218,6 +219,42 @@
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths" id="more-comparison">
+        <div class="is-centered method-buttons">
+          <button class="button method-button is-white is-success is-selected" value="3DGS" onclick="selectCompVideo(this)">3DGS</button>
+          <button class="button method-button is-white" value="DVGO" onclick="selectCompVideo(this)">DVGO</button>
+          <button class="button method-button is-white" value="DietNeRF" onclick="selectCompVideo(this)">DietNeRF</button>
+          <button class="button method-button is-white" value="RegNeRF" onclick="selectCompVideo(this)">RegNeRF</button>
+          <button class="button method-button is-white" value="FreeNeRF" onclick="selectCompVideo(this)">FreeNeRF</button>
+          <button class="button method-button is-white" value="SparseNeRF" onclick="selectCompVideo(this)">SparseNeRF</button>
+          <button class="button method-button is-white" value="ZeroRF" onclick="selectCompVideo(this)">ZeroRF</button>
+          <button class="button method-button is-white" value="FSGS" onclick="selectCompVideo(this)">FSGS</button>
+        </div>
+        <div>
+          <video poster="" id="more-comparison-video" autoplay muted loop playsinline src="static/videos/mip360_bonsai_4_3DGS.mp4" onplay="resizeAndPlay(this)"></video>
+          <canvas height=0 id="more-comparison-canvas"></canvas>
+          <p>Generated with only four input images.</p>
+        </div>
+        <div class="is-centered scene-buttons">
+          <button class="button scene-button is-white is-success is-selected" value="mip360_bonsai" onclick="selectCompVideo(this)">bonsai</button>
+          <button class="button scene-button is-white" value="mip360_garden" onclick="selectCompVideo(this)">garden</button>
+          <button class="button scene-button is-white" value="mip360_kitchen" onclick="selectCompVideo(this)">kitchen</button>
+          <button class="button scene-button is-white" value="omni3d_broccoli_003" onclick="selectCompVideo(this)">broccoli</button>
+          <button class="button scene-button is-white" value="omni3d_suitcase_006" onclick="selectCompVideo(this)">suitcase</button><br/>
+          <button class="button scene-button is-white" value="omni3d_hamburger_012" onclick="selectCompVideo(this)">hamburger</button>
+          <button class="button scene-button is-white" value="omni3d_pineapple_013" onclick="selectCompVideo(this)">pineapple</button>
+          <button class="button scene-button is-white" value="omni3d_vase_012" onclick="selectCompVideo(this)">vase</button>
+          <button class="button scene-button is-white" value="oppo_obj_27_pumpkin2" onclick="selectCompVideo(this)">pumpkin</button>
+          <button class="button scene-button is-white" value="oppo_obj_29_fabric_toy" onclick="selectCompVideo(this)">fabric toy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Ablation</h2>
         <video poster="" id="evolution" autoplay controls muted loop playsinline height="100%">
@@ -230,57 +267,6 @@
         </div>
       </div>
     </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <div class="buttons has-addons is-centered">
-          <button class="button method-button is-success is-selected" value="3DGS" onclick="selectCompVideo(this)">3DGS</button>
-          <button class="button method-button" value="DVGO" onclick="selectCompVideo(this)">DVGO</button>
-          <button class="button method-button" value="DietNeRF" onclick="selectCompVideo(this)">DietNeRF</button>
-          <button class="button method-button" value="RegNeRF" onclick="selectCompVideo(this)">RegNeRF</button>
-          <button class="button method-button" value="FreeNeRF" onclick="selectCompVideo(this)">FreeNeRF</button>
-          <button class="button method-button" value="SparseNeRF" onclick="selectCompVideo(this)">SparseNeRF</button>
-          <button class="button method-button" value="ZeroRF" onclick="selectCompVideo(this)">ZeroRF</button>
-          <button class="button method-button" value="FSGS" onclick="selectCompVideo(this)">FSGS</button>
-        </div>
-        <div class="columns is-gapless">
-          <div class="column">
-            <div class="video-container">
-              <video poster="" id="ours-comparison" autoplay muted loop playsinline>
-                <source src="static/videos/comparison/mip360_bonsai_4_GaussianObject.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="tag is-large is-white">GaussianObject</div><br/>
-          </div>
-          <div class="column">
-            <div class="video-container">
-              <video poster="" id="others-comparison" autoplay muted loop playsinline>
-                <source src="static/videos/comparison/mip360_bonsai_4_3DGS.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="tag is-large is-white">Comparison</div><br/>
-          </div>
-        </div>
-        <div class="buttons has-addons is-centered">
-          <button class="button scene-button is-success is-selected" value="mip360_bonsai" onclick="selectCompVideo(undefined, this)">bonsai</button>
-          <button class="button scene-button" value="mip360_garden" onclick="selectCompVideo(undefined, this)">garden</button>
-          <button class="button scene-button" value="omni3d_broccoli_003" onclick="selectCompVideo(undefined, this)">broccoli</button>
-          <button class="button scene-button" value="omni3d_dinosaur_006" onclick="selectCompVideo(undefined, this)">dinosaur</button>
-          <button class="button scene-button" value="omni3d_hamburger_012" onclick="selectCompVideo(undefined, this)">hamburger</button>
-        </div>
-        <div class="buttons has-addons is-centered">
-          <button class="button scene-button" value="omni3d_pineapple_013" onclick="selectCompVideo(undefined, this)">pineapple</button>
-          <button class="button scene-button" value="omni3d_suitcase_006" onclick="selectCompVideo(undefined, this)">suitcase</button>
-          <button class="button scene-button" value="omni3d_vase_012" onclick="selectCompVideo(undefined, this)">vase</button>
-          <button class="button scene-button" value="oppo_obj_27_pumpkin2" onclick="selectCompVideo(undefined, this)">pumpkin</button>
-          <button class="button scene-button" value="oppo_obj_29_fabric_toy" onclick="selectCompVideo(undefined, this)">fabric toy</button>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!--
