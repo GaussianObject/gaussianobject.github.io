@@ -1,6 +1,9 @@
 $(document).ready(function() {
-  preloadVideos();
-})
+  let teaser = document.getElementById('teaser');
+  teaser.onloadeddata = function() {
+    preloadVideos();
+  };
+});
 
 async function preloadVideo(url) {
   try {
