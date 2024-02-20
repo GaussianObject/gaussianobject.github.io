@@ -6,7 +6,7 @@ If you find Nerfies useful for your work please cite:
 
 ```text
 @article{yang2024gaussianobject,
-  title   = {GaussainObject: Just Taking Four Images to Get A High-Quality
+  title   = {GaussianObject: Just Taking Four Images to Get A High-Quality
              3D Object with Gaussian Splatting},
   author  = {Chen Yang and Sikuang Li and Jiemin Fang and Ruofan Liang and
              Lingxi Xie and Xiaopeng Zhang and Wei Shen and Qi Tian},
