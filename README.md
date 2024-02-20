@@ -1,6 +1,6 @@
 # GausianObject
 
-This is the repository that contains source code for the [GausianObject website](https://gaussianobject.github.io), borrowed from [Nerfies](https://nerfies.github.io)
+This is the repository that contains source code for the [GaussianObject website](https://gaussianobject.github.io), borrowed from [Nerfies](https://nerfies.github.io)
 
 If you find Nerfies useful for your work please cite:
 
