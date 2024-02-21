@@ -4,16 +4,19 @@ function selectCompVideo(element) {
 
   let parent = element.parentElement.parentElement;
   let videoId = parent.getAttribute("id") + "-video";
+  let imageId = parent.getAttribute("id") + "-image";
   let canvasId = parent.getAttribute("id") + "-canvas";
   let methodName = parent.getElementsByClassName("method-buttons")[0].getElementsByClassName("is-selected")[0].getAttribute("value");
   let sceneName = parent.getElementsByClassName("scene-buttons").length == 0 ? "omni3d_dinosaur_006" : parent.getElementsByClassName("scene-buttons")[0].getElementsByClassName("is-selected")[0].getAttribute("value");
 
   let video = document.getElementById(videoId);
+  let image = document.getElementById(imageId);
   let canvas = document.getElementById(canvasId);
 
   canvas.replaceWith(canvas.cloneNode(true));
 
   video.src = "static/videos/comparison/" + sceneName + "_4_" + methodName + ".mp4";
+  image.src = "static/images/comparison/" + sceneName + "_4.png";;
   video.onloadeddata = () => {
     resizeAndPlay(video);
   };
@@ -145,6 +148,9 @@ Number.prototype.clamp = function (min, max) {
 
 function resizeAndPlay(element) {
   let canvas = document.getElementById(element.id.replace('video', 'canvas'));
+  let image = document.getElementById(element.id.replace('video', 'image'));
+  image.width = image.width / image.height * element.videoHeight;
+  image.height = element.videoHeight;
   canvas.width = element.videoWidth / 2;
   canvas.height = element.videoHeight;
   element.play();

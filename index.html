@@ -221,8 +221,11 @@
           <button class="button method-button is-white" value="FSGS" onclick="selectCompVideo(this)">FSGS</button>
         </div>
         <div>
-          <video poster="" id="more-comparison-video" autoplay muted loop playsinline src="static/videos/comparison/mip360_bonsai_4_3DGS.mp4" onplay="resizeAndPlay(this)"></video>
-          <canvas height=0 id="more-comparison-canvas"></canvas>
+          <span>
+            <video poster="" id="more-comparison-video" autoplay muted loop playsinline src="static/videos/comparison/mip360_bonsai_4_3DGS.mp4" onplay="resizeAndPlay(this)"></video>
+            <image src="static/images/comparison/mip360_bonsai_4.png" id="more-comparison-image" alt="input-images">
+            <canvas height=0 id="more-comparison-canvas"></canvas>
+          </span>
           <p>Generated with only <strong>four input images</strong>.</p>
         </div>
         <div class="is-centered scene-buttons">
