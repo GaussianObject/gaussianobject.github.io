@@ -29,7 +29,7 @@ async function preloadVideos() {
   for (var j = 0; j < scenes.length; j++) {
     for (var i = 0; i < methods.length; i++) {
       await preloadVideo("static/videos/comparison/" + scenes[j] + "_4_" + methods[i] + ".mp4");
-      console.log("Preloaded: " + scenes[j] + "_4_" + methods[i] + ".mp4");
+      // console.log("Preloaded: " + scenes[j] + "_4_" + methods[i] + ".mp4");
     }
   }
 }

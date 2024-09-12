@@ -6,6 +6,7 @@ function selectCompVideo(element) {
   let videoId = parent.getAttribute("id") + "-video";
   let imageId = parent.getAttribute("id") + "-image";
   let canvasId = parent.getAttribute("id") + "-canvas";
+  // let colmap = parent.getElementsByClassName("colmap-buttons")[0].getElementsByClassName("is-selected")[0].getAttribute("value");
   let methodName = parent.getElementsByClassName("method-buttons")[0].getElementsByClassName("is-selected")[0].getAttribute("value");
   let sceneName = parent.getElementsByClassName("scene-buttons").length == 0 ? "omni3d_dinosaur_006" : parent.getElementsByClassName("scene-buttons")[0].getElementsByClassName("is-selected")[0].getAttribute("value");
 
@@ -15,6 +16,7 @@ function selectCompVideo(element) {
 
   canvas.replaceWith(canvas.cloneNode(true));
 
+  // video.src = "static/videos/comparison/" + sceneName + "_4_" + methodName + "_" + colmap + ".mp4";
   video.src = "static/videos/comparison/" + sceneName + "_4_" + methodName + ".mp4";
   image.src = "static/images/comparison/" + sceneName + "_4.png";;
   video.onloadeddata = () => {
